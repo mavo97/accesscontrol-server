@@ -2,7 +2,14 @@ const EntryLog = require('../models');
 
 const resolvers = {
   Query: {
-    getAllEntries: async () => await EntryLog.findAll(),
+    getAllEntries: async () => {
+      try {
+        const response = await EntryLog.findAll();
+        return response;
+      } catch (e) {
+        return e.message;
+      }
+    },
   },
   Mutation: {
     async createEntyLog(root, { controlNumber, entryTime, career }, { db }) {
