@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createEntyLog(controlNumber: Int!, entryTime: String!, career: String!): EntyLog!
+    createEntryLog(controlNumber: Int!, entryTime: String!, career: String!): EntyLog!
   }
 `;
 module.exports = typeDefs;
