@@ -9,6 +9,7 @@ if (process.env.DATABASE_URL) {
     dialect: 'postgres',
     dialectOptions: {
       ssl: true,
+      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
     },
   }); // Example for postgres
 } else {
