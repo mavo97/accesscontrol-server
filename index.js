@@ -3,9 +3,11 @@ const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema');
 const resolvers = require('./resolver');
 const db = require('./config/database');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 const server = new ApolloServer({ typeDefs, resolvers, context: { db } });
 server.applyMiddleware({ app });
