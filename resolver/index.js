@@ -6,11 +6,16 @@ const resolvers = {
   },
   Mutation: {
     async createEntyLog(root, { controlNumber, entryTime, career }, { db }) {
-      return EntryLog.create({
-        controlNumber,
-        entryTime,
-        career,
-      });
+      try {
+        let response = await EntryLog.create({
+          controlNumber,
+          entryTime,
+          career,
+        });
+        return response;
+      } catch (e) {
+        return e.message;
+      }
     },
   },
 };
