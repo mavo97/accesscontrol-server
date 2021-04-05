@@ -1,7 +1,7 @@
 const express = require('express');
-const { ApolloServer, gql } = require('apollo-server-express');
-const typeDefs = require('./schema/entryLog-schema');
-const resolvers = require('./resolver/resolver');
+const { ApolloServer } = require('apollo-server-express');
+const typeDefs = require('./schema');
+const resolvers = require('./resolver');
 const db = require('./config/database');
 
 const app = express();

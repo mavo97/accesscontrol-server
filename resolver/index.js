@@ -1,4 +1,4 @@
-const EntryLog = require('../models/entryLog');
+const EntryLog = require('../models');
 
 const resolvers = {
   Query: {
