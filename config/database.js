@@ -7,9 +7,14 @@ let db;
 if (process.env.DATABASE_URL) {
   db = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
+    ssl: true,
+    protocol: 'postgres',
+    logging: true,
     dialectOptions: {
-      ssl: true,
-      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // <<<<<< YOU NEED THIS
+      },
     },
   }); // Example for postgres
 } else {
