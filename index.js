@@ -9,7 +9,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-const server = new ApolloServer({ typeDefs, resolvers, context: { db } });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  introspection: true,
+  playground: true,
+  context: { db },
+});
 server.applyMiddleware({ app });
 db.authenticate();
 db.sync();

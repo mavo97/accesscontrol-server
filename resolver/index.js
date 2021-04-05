@@ -12,7 +12,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    async createEntyLog(root, { controlNumber, entryTime, career }, { db }) {
+    async createEntryLog(root, { controlNumber, entryTime, career }, { db }) {
       try {
         let response = await EntryLog.create({
           controlNumber,
