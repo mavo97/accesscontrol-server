@@ -5,7 +5,12 @@ dotenv.config();
 let db;
 
 if (process.env.DATABASE_URL) {
-  db = new Sequelize(process.env.DATABASE_URL); // Example for postgres
+  db = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    },
+  }); // Example for postgres
 } else {
   db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
