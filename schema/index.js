@@ -12,7 +12,7 @@ const typeDefs = gql`
 
   type Query {
     getAllEntries: [EntryLog!]!
-    getEntriesByDate(dates: [String!]!): [EntryLog!]!
+    getEntriesByDate(career: String!, dates: [String!]!): [EntryLog!]!
   }
 
   type Mutation {

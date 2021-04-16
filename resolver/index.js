@@ -11,16 +11,17 @@ const resolvers = {
         return e.message;
       }
     },
-    getEntriesByDate: async (root, { dates }) => {
+    getEntriesByDate: async (root, { dates, career }) => {
       try {
         const datesMap = dates.map((date) => new Date(date).getTime());
 
         const newDates = datesMap.sort(function (a, b) {
           return new Date(b) - new Date(a);
         });
-        console.log(newDates);
+        // console.log(newDates);
         const response = await EntryLog.findAll({
           where: {
+            career: career,
             createdAt: {
               [Op.between]: [newDates[1], newDates[0]],
             },
