@@ -23,6 +23,7 @@ const resolvers = {
         });
         return response;
       } catch (e) {
+        console.log(e);
         return e.message;
       }
     },
