@@ -1,19 +1,28 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type EntyLog {
+  type EntryLog {
     id: Int!
     controlNumber: Int!
     entryTime: String!
     career: String!
+    name: String!
+    lastName: String!
   }
 
   type Query {
-    getAllEntries: [EntyLog!]!
+    getAllEntries: [EntryLog!]!
   }
 
   type Mutation {
-    createEntryLog(controlNumber: Int!, entryTime: String!, career: String!): EntyLog!
+    createEntryLog(
+      controlNumber: Int!
+      entryTime: String!
+      career: String!
+      name: String!
+      lastName: String!
+    ): EntryLog!
+    deleteEntryLog(controlNumber: Int!): Int!
   }
 `;
 module.exports = typeDefs;

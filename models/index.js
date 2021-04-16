@@ -11,6 +11,14 @@ const EntryLog = db.define('entryLog', {
     type: Sequelize.BIGINT(8),
     allowNull: false,
   },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   entryTime: {
     type: Sequelize.DATE,
     allowNull: false,

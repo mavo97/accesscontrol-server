@@ -12,16 +12,30 @@ const resolvers = {
     },
   },
   Mutation: {
-    async createEntryLog(root, { controlNumber, entryTime, career }, { db }) {
+    async createEntryLog(root, { controlNumber, entryTime, career, name, lastName }, { db }) {
       try {
         let response = await EntryLog.create({
           controlNumber,
           entryTime,
           career,
+          name,
+          lastName,
         });
         return response;
       } catch (e) {
         return e.message;
+      }
+    },
+    async deleteEntryLog(root, { controlNumber }, { db }) {
+      try {
+        let response = await EntryLog.destroy({
+          where: {
+            controlNumber: controlNumber,
+          },
+        });
+        return response;
+      } catch (error) {
+        return error.message;
       }
     },
   },
