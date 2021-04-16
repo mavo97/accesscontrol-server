@@ -12,6 +12,7 @@ const typeDefs = gql`
 
   type Query {
     getAllEntries: [EntryLog!]!
+    getEntriesByDate(dates: [String!]!): [EntryLog!]!
   }
 
   type Mutation {

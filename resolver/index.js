@@ -1,10 +1,32 @@
 const EntryLog = require('../models');
+const { Op } = require('sequelize');
 
 const resolvers = {
   Query: {
     getAllEntries: async () => {
       try {
         const response = await EntryLog.findAll();
+        return response;
+      } catch (e) {
+        return e.message;
+      }
+    },
+    getEntriesByDate: async (root, { dates }) => {
+      try {
+        const datesMap = dates.map((date) => new Date(date).getTime());
+
+        const newDates = datesMap.sort(function (a, b) {
+          return new Date(b) - new Date(a);
+        });
+        console.log(newDates);
+        const response = await EntryLog.findAll({
+          where: {
+            createdAt: {
+              [Op.between]: [newDates[1], newDates[0]],
+            },
+          },
+        });
+        console.log(response, 'RESPONSE');
         return response;
       } catch (e) {
         return e.message;
