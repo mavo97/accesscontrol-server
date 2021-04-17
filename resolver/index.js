@@ -30,6 +30,7 @@ const resolvers = {
         console.log(response, 'RESPONSE');
         return response;
       } catch (e) {
+        console.log(e);
         return e.message;
       }
     },
