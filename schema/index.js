@@ -8,10 +8,17 @@ const typeDefs = gql`
     career: String!
     name: String!
     lastName: String!
+    serviceId: Int!
+  }
+
+  type Service {
+    id: Int!
+    name: String!
   }
 
   type Query {
     getAllEntries: [EntryLog!]!
+    getServices: [Service!]!
     getEntriesByDate(career: String!, dates: [String!]!): [EntryLog!]!
   }
 
@@ -22,8 +29,11 @@ const typeDefs = gql`
       career: String!
       name: String!
       lastName: String!
+      serviceId: Int!
     ): EntryLog!
     deleteEntryLog(controlNumber: Int!): Int!
+    createService(name: String!): Service!
+    deleteService(id: Int!): Int!
   }
 `;
 module.exports = typeDefs;

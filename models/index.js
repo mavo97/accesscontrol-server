@@ -1,6 +1,18 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
+const Service = db.define('service', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  }
+});
+
 const EntryLog = db.define('entryLog', {
   id: {
     type: Sequelize.INTEGER,
@@ -27,6 +39,21 @@ const EntryLog = db.define('entryLog', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  serviceId: {
+    type: Sequelize.INTEGER,
+    references: {
+        model: Service,
+        key: 'id'
+    }
+  }
 });
 
-module.exports = EntryLog;
+EntryLog.belongsTo(Service, {
+  foreignKey: 'serviceId',
+});
+
+
+module.exports = {
+  EntryLog,
+  Service
+};

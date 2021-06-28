@@ -1,4 +1,4 @@
-const EntryLog = require('../models');
+const { EntryLog, Service } = require('../models');
 const { Op } = require('sequelize');
 
 const resolvers = {
@@ -6,6 +6,14 @@ const resolvers = {
     getAllEntries: async () => {
       try {
         const response = await EntryLog.findAll();
+        return response;
+      } catch (e) {
+        return e.message;
+      }
+    },
+    getServices: async () => {
+      try {
+        const response = await Service.findAll();
         return response;
       } catch (e) {
         return e.message;
@@ -36,7 +44,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    async createEntryLog(root, { controlNumber, entryTime, career, name, lastName }, { db }) {
+    async createEntryLog(root, { controlNumber, entryTime, career, name, lastName, serviceId }, { db }) {
       try {
         let response = await EntryLog.create({
           controlNumber,
@@ -44,6 +52,7 @@ const resolvers = {
           career,
           name,
           lastName,
+          serviceId,
         });
         return response;
       } catch (e) {
@@ -56,6 +65,27 @@ const resolvers = {
         let response = await EntryLog.destroy({
           where: {
             controlNumber: controlNumber,
+          },
+        });
+        return response;
+      } catch (error) {
+        return error.message;
+      }
+    },
+    async createService(root, { name }, { db }) {
+      try {
+        let response = await Service.create({ name });
+        return response;
+      } catch (e) {
+        console.log(e);
+        return e.message;
+      }
+    },
+    async deleteService(root, { id }, { db }) {
+      try {
+        let response = await Service.destroy({
+          where: {
+            id: id,
           },
         });
         return response;
